@@ -28,6 +28,7 @@ const validator = (schema, property) => {
 };
 
 const userIdValidator = (req, res, next) => {
+  console.log(req.userId, req.params.id)
   if (req.userId !== req.params.id) {
     res.sendStatus(FORBIDDEN);
   } else {

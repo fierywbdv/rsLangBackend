@@ -29,7 +29,7 @@ router.get(
 
 router.put(
   '/:id',
-  // userIdValidator,
+  userIdValidator,
   validator(id, 'params'),
   validator(user, 'body'),
   multer.single('avatar'),

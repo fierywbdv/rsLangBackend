@@ -21,10 +21,10 @@ const authenticate = async user => {
 
 const get = id => usersRepo.get(id);
 
-const save = (user, avatarImage, res) => usersRepo.save(user, avatarImage, res);
+const save = (user, avatarImage) => usersRepo.save(user, avatarImage);
 
-const update = (id, user, avatarImage, res) =>
-  usersRepo.update(id, user, avatarImage, res);
+const update = (id, user, avatarImage) =>
+  usersRepo.update(id, user, avatarImage);
 
 const remove = async id => {
   await statisticService.remove(id);

@@ -17,18 +17,14 @@ const get = async id => {
   if (!user) {
     throw new NOT_FOUND_ERROR(ENTITY_NAME, { id });
   }
-
   return user;
 };
 
-const save = async (user, avatarImage, res) => {
+const save = async (user, avatarImage) => {
   try {
     if (avatarImage) {
       cloudinary.v2.uploader
         .upload_stream({ resource_type: 'auto' }, async (error, result) => {
-          if (error || !result) {
-            res.json(error);
-          }
           const newData = {
             ...user,
             avatar: result.url || ''
@@ -48,14 +44,11 @@ const save = async (user, avatarImage, res) => {
   }
 };
 
-const update = async (id, user, avatarImage, res) => {
+const update = async (id, user, avatarImage) => {
   try {
     if (avatarImage) {
       cloudinary.v2.uploader
         .upload_stream({ resource_type: 'auto' }, async (error, result) => {
-          if (error || !result) {
-            res.json(error);
-          }
           const newData = {
             ...user,
             avatar: result.url || ''
@@ -71,11 +64,7 @@ const update = async (id, user, avatarImage, res) => {
       await User.findOneAndUpdate({ _id: id }, { $set: user }, { new: true });
     }
   } catch (err) {
-    if (err.code === MONGO_ENTITY_EXISTS_ERROR_CODE) {
-      throw new ENTITY_EXISTS(`${ENTITY_NAME} with this e-mail exists`);
-    } else {
-      throw err;
-    }
+    console.error('err', err);
   }
 };
 

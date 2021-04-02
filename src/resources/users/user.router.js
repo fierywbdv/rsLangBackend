@@ -13,7 +13,8 @@ router.post(
   validator(user, 'body'),
   multer.single('avatar'),
   async (req, res) => {
-    userService.save(req.body, req.file, res);
+    await userService.save(req.body, req.file);
+    res.status(200).json('UserCreated');
   }
 );
 
@@ -34,7 +35,8 @@ router.put(
   validator(user, 'body'),
   multer.single('avatar'),
   async (req, res) => {
-    userService.update(req.params.id, req.body, req.file, res);
+    await userService.update(req.params.id, req.body, req.file);
+    res.status(200).json('userUpdated');
   }
 );
 

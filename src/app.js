@@ -25,7 +25,12 @@ const { userIdValidator } = require('./utils/validation/validator');
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
 app.use(helmet());
-app.use(cors());
+
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use(checkAuthentication);

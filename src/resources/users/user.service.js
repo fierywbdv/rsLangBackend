@@ -7,9 +7,12 @@ const statisticService = require('../statistics/statistic.service');
 const { AUTHENTICATION_ERROR } = require('../../errors/appErrors');
 
 const authenticate = async user => {
-  const userEntity = await usersRepo.getUserByEmail(user.email);
+  const userEntity = await usersRepo.getUserByEmail(user.body.email);
 
-  const isValidated = await bcrypt.compare(user.password, userEntity.password);
+  const isValidated = await bcrypt.compare(
+    user.body.password,
+    userEntity.password
+  );
   if (!isValidated) {
     throw new AUTHENTICATION_ERROR();
   }

@@ -15,8 +15,11 @@ const errorResponse = errors => {
 };
 
 const validator = (schema, property) => {
+  // console.log(property)
   return (req, res, next) => {
+    console.log(req)
     const { error } = schema.validate(req[property]);
+    // console.log(error)
     if (error) {
       res
         .status(property === 'body' ? UNPROCESSABLE_ENTITY : BAD_REQUEST)
@@ -28,7 +31,6 @@ const validator = (schema, property) => {
 };
 
 const userIdValidator = (req, res, next) => {
-  console.log(req.userId, req.params.id)
   if (req.userId !== req.params.id) {
     res.sendStatus(FORBIDDEN);
   } else {

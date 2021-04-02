@@ -18,6 +18,7 @@ const optionalScheme = Joi.object()
   ])
   .custom(optionalValidator, 'optional object validation')
   .error(errors => {
+    console.log(errors);
     errors
       .filter(err => err.code === 'object.length')
       .forEach(

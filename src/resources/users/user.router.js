@@ -13,6 +13,7 @@ router.post(
   validator(user, 'body'),
   multer.single('avatar'),
   async (req, res) => {
+    console.log(req.body, req.file)
     await userService.save(req.body, req.file);
     res.status(200).json('UserCreated');
   }

@@ -1,6 +1,5 @@
 const logger = require('./common/logging');
 
-// uncaughtException is been catching by Winston
 process.on('unhandledRejection', reason => {
   process.emit('uncaughtException', reason);
 });
